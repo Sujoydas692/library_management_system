@@ -1,0 +1,393 @@
+<?php
+
+include '../connection.php';
+
+session_start();
+
+if (isset($_SESSION['student_login'])) {
+    header('location: index.php');
+}
+
+if (isset($_POST['register'])) {
+    $fname = $_POST['fname'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $c_password = $_POST['c_password'];
+    $roll = $_POST['roll'];
+    $phone = $_POST['phone'];
+
+    $image = explode('.', $_FILES['image']['name']);
+    $image_ext = end($image);
+
+    $image = date('Ymdhis.').$image_ext;
+
+     $input_error = array();
+     if (empty($fname)) {
+        $input_error['fname'] = "This field is required!";
+         
+     }
+     if (empty($email)) {
+        $input_error['email'] = "This field is required!";
+         
+     }
+     if (empty($username)) {
+        $input_error['username'] = "This field is required!";
+         
+     }
+     if (empty($password)) {
+        $input_error['password'] = "This field is required!";
+         
+     }
+     if (empty($c_password)) {
+        $input_error['c_password'] = "This field is required!";
+         
+     }
+     if (empty($roll)) {
+        $input_error['roll'] = "This field is required!";
+         
+     }
+     if (empty($phone)) {
+        $input_error['phone'] = "This field is required!";
+         
+     }
+     if (count($input_error) == 0) {
+
+
+        $email_check = mysqli_query($con,"SELECT * FROM `student` WHERE `email` = '$email'");
+        $email_check_row = mysqli_num_rows($email_check);
+
+        if ($email_check_row == 0) {
+
+            $username_check = mysqli_query($con,"SELECT * FROM `student` WHERE `username` = '$username'");
+        $username_check_row = mysqli_num_rows($username_check);
+
+        if ($username_check_row == 0) {
+
+            if (strlen($username) > 7) {
+                if (strlen($password) > 7) {
+                    if ($password == $c_password) {
+
+                        $roll_check = mysqli_query($con,"SELECT * FROM `student` WHERE `roll` = '$roll'");
+                        $roll_check_row = mysqli_num_rows($roll_check);
+
+                        if ($roll_check_row == 0) {
+
+                            $phone_check = mysqli_query($con,"SELECT * FROM `student` WHERE `phone` = '$phone'");
+                        $phone_check_row = mysqli_num_rows($phone_check);
+
+                        if ($phone_check_row == 0) {
+                             $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+                                 $result = mysqli_query($con, "INSERT INTO `student`(`fname`, `roll`, `email`, `username`, `password`,`status`,`phone`,`image`) VALUES ('$fname','$roll','$email','$username','$password_hash','0','$phone','$image')");
+
+                                 if ($result) {
+                                    $success = "Registration Successfully!";
+
+                                    move_uploaded_file($_FILES['image']['tmp_name'], '../images/student/'.$image);
+                                    // header('location: register.php');
+                                    
+                                     
+                                 }else {
+                                     $error = "Something Worng!";
+                                 }
+
+                            
+                        }else {
+                            $phone_error = "This Phone Number is Exists!";
+                        }   
+                        }else {
+                            $roll_error = "This Student ID is Exists!";
+                        }
+                        
+                    }else {
+                        $c_password_error = "Password does not match!";
+                    }
+                    
+                }else {
+                    $password_error = "Password more than 8 characters!";
+                }
+                
+            }else {
+            $username_exists = "Username more than 8 characters!";
+        }
+            
+        }else {
+            $username_exists = "This username already exists!";
+        }
+            
+            
+        }else {
+            $email_exists = "This email already exists!";
+        }
+         
+         
+     }
+
+
+   
+    
+}
+
+
+
+?>
+
+
+<!doctype html>
+<html lang="en" class="fixed accounts sign-in">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Student Registration</title>
+    <!--BASIC css-->
+    <!-- ========================================================= -->
+    <link rel="stylesheet" href="../assests/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assests/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../assests/vendor/animate.css/animate.css">
+    <!--SECTION css-->
+    <!-- ========================================================= -->
+    <!--TEMPLATE css-->
+    <!-- ========================================================= -->
+    <link rel="stylesheet" href="../assests/stylesheets/css/style.css">
+</head>
+
+<body>
+<div class="wrap">
+    <!-- page BODY -->
+    <!-- ========================================================= -->
+    <div class="page-body animated slideInDown">
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <!--LOGO-->
+        <div class="logo">
+            <h1 class="text-center">LMS</h1>
+
+            <?php
+              if (isset($success)) {
+                ?>
+                  <div class="alert alert-success" role="alert">
+                    <?= $success; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                <?php
+                  
+              }
+
+               ?>
+
+               <?php
+              if (isset($error)) {
+                ?>
+                  <div class="alert alert-danger" role="alert">
+                    <?= $error; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                <?php
+                  
+              }
+
+               ?>
+
+               <?php
+              if (isset($email_exists)) {
+                ?>
+                  <div class="alert alert-danger" role="alert">
+                    <?= $email_exists; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                <?php
+                  
+              }
+
+               ?>
+
+               <?php
+               if (isset($username_exists)) {
+                ?>
+                 <div class="alert alert-danger" role="alert">
+                    <?= $username_exists; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                 <?php  
+               }
+
+               ?>
+               <?php
+               if (isset($password_error)) {
+                ?>
+                 <div class="alert alert-danger" role="alert">
+                    <?= $password_error; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                 <?php  
+               }
+
+               ?>
+                <?php
+               if (isset($c_password_error)) {
+                ?>
+                 <div class="alert alert-danger" role="alert">
+                    <?= $c_password_error; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                 <?php  
+               }
+
+               ?>
+               <?php
+               if (isset($roll_error)) {
+                ?>
+                 <div class="alert alert-danger" role="alert">
+                    <?= $roll_error; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                 <?php  
+               }
+
+               ?>
+               <?php
+               if (isset($phone_error)) {
+                ?>
+                 <div class="alert alert-danger" role="alert">
+                    <?= $phone_error; ?>
+                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                 <?php  
+               }
+
+               ?>
+
+
+
+
+            
+        </div>
+        <div class="box">
+            <!--SIGN IN FORM-->
+            <div class="panel mb-none">
+                <div class="panel-content bg-scale-0">
+                    <form method="POST" action="<?= $_SERVER['PHP_SELF'] ?> " enctype="multipart/form-data">
+                        <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                <input type="text" class="form-control" placeholder="Full Name" name="fname" value="<?= isset($fname) ? $fname:'' ?>">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <?php if (isset($input_error['fname'])) {
+                                echo '<span class="input-error">'.$input_error['fname'].'</span>';
+                                
+                            } ?>
+                        </div>
+                        <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                <input type="email" class="form-control" placeholder="Email" name="email" value="<?= isset($email) ? $email:'' ?>">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <?php if (isset($input_error['email'])) {
+                                echo '<span class="input-error">'.$input_error['email'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                         <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                <input type="text" class="form-control" placeholder="Username" name="username" value="<?= isset($username) ? $username:'' ?>">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <?php if (isset($input_error['username'])) {
+                                echo '<span class="input-error">'.$input_error['username'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                        <div class="form-group">
+                            <span class="input-with-icon">
+                                <input type="password" class="form-control" placeholder="Password" name="password">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <?php if (isset($input_error['password'])) {
+                                echo '<span class="input-error">'.$input_error['password'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                        <div class="form-group">
+                            <span class="input-with-icon">
+                                <input type="password" class="form-control" placeholder="Confirm Password" name="c_password">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <?php if (isset($input_error['c_password'])) {
+                                echo '<span class="input-error">'.$input_error['c_password'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                         <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                <input type="text" class="form-control" placeholder="Student ID" name="roll" pattern="[0-9]{6}" value="<?= isset($roll) ? $roll:'' ?>">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <?php if (isset($input_error['roll'])) {
+                                echo '<span class="input-error">'.$input_error['roll'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                         <div class="form-group mt-md">
+                            <span class="input-with-icon">
+                                <input type="text" class="form-control" placeholder="Phone No." name="phone" pattern="01[3|4|5|6|7|8|9][0-9]{8}" value="<?= isset($phone) ? $phone:'' ?>">
+                                <i class="fa fa-phone"></i>
+                            </span>
+                            <?php if (isset($input_error['phone'])) {
+                                echo '<span class="input-error">'.$input_error['phone'].'</span>';
+                                
+                            } ?>
+
+                        </div>
+                        <div class="form-group mt-md">
+                             <div class="col-sm-6 offset-3">
+                               <input id="image" type="file" name="image" required="">
+                             </div><br>
+                         </div>
+                        <div class="form-group">
+                                <input class="btn btn-primary btn-block" type="submit" name="register" value="Sign Up">
+                            
+                        </div>
+                        <div class="form-group text-center">
+                            Have an account?, <a href="sign-in.php">Sign In</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    </div>
+</div>
+<!--BASIC scripts-->
+<!-- ========================================================= -->
+<script src="../assests/vendor/jquery/jquery-1.12.3.min.js"></script>
+<script src="../assests/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assests/vendor/nano-scroller/nano-scroller.js"></script>
+<!--TEMPLATE scripts-->
+<!-- ========================================================= -->
+<script src="../assests/javascripts/template-script.min.js"></script>
+<script src="../assests/javascripts/template-init.min.js"></script>
+<!-- SECTION script and examples-->
+<!-- ========================================================= -->
+</body>
+</html>
