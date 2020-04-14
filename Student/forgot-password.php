@@ -13,7 +13,7 @@ require '../connection.php';
 if (isset($_POST['email'])) {
 
     $emailto = $_POST['email'];
-    $token = uniqid(true);
+    $token = md5(time().$emailto);
     $qry = mysqli_query($con, "INSERT INTO `token`(`email`, `token`) VALUES ('$emailto','$token')");
     if (!$qry) {
         exit("Error");

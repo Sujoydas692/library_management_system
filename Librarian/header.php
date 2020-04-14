@@ -11,7 +11,7 @@ if (!isset($_SESSION['librarian_login'])) {
 }
 
  $librarian_login = $_SESSION['librarian_login'];
- $result = mysqli_query($con, "SELECT * FROM `librarian` WHERE `username` = '$librarian_login'");
+ $result = mysqli_query($con, "SELECT * FROM `librarian` WHERE `username` = '$librarian_login' OR `email` = '$librarian_login'");
  $row = mysqli_fetch_assoc($result);
  
 
