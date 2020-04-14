@@ -5,17 +5,16 @@ include 'header.php';
 
 $student_login = $_SESSION['student_login'];
 
- $result = mysqli_query($con, "SELECT * FROM `student` WHERE `username` = '$student_login'");
+ $result = mysqli_query($con, "SELECT * FROM `student` WHERE `username` = '$student_login' OR `email` = '$student_login'");
  $row = mysqli_fetch_assoc($result);
 
  if (isset($_POST['update_profile'])) {
 
     $fname = $_POST['fname'];
-    $email = $_POST['email'];
     $phone = $_POST['phone'];
 
 
-    $qry = "UPDATE `student` SET `fname`='$fname',`email`='$email',`phone`='$phone' WHERE `username` = '$student_login'";
+    $qry = "UPDATE `student` SET `fname`='$fname',`phone`='$phone' WHERE `username` = '$student_login' OR `email` = '$student_login'";
 
     $result = mysqli_query($con,$qry);
 
@@ -72,7 +71,7 @@ $student_login = $_SESSION['student_login'];
                 $photo = end($photo);
                 $photo_name = date('Ymdhis.').$photo;
 
-               $upload = mysqli_query($con,"UPDATE `student` SET `image`='$photo_name' WHERE `username` = '$student_login'");
+               $upload = mysqli_query($con,"UPDATE `student` SET `image`='$photo_name' WHERE `username` = '$student_login' OR `email` = '$student_login'");
 
                if ($upload) {
 
@@ -141,8 +140,16 @@ $student_login = $_SESSION['student_login'];
                                             <input type="text" class="form-control" name="fname" id="fname" placeholder="Full Name" value="<?= $row['fname'] ?>">
                                         </div>
                                         <div class="form-group">
+                                            <label for="roll">Student ID</label>
+                                            <input type="text" class="form-control" name="roll" id="roll" placeholder="Student ID" value="<?= $row['roll'] ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="email">Email Address</label>
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?= $row['email'] ?>">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?= $row['email'] ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">User Name</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="username" value="<?= $row['username'] ?>" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">Phone No.</label>

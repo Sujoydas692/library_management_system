@@ -11,7 +11,7 @@ if (!isset($_SESSION['student_login'])) {
 }
 
 $student_login = $_SESSION['student_login'];
- $result = mysqli_query($con, "SELECT * FROM `student` WHERE `username` = '$student_login'");
+ $result = mysqli_query($con, "SELECT * FROM `student` WHERE `username` = '$student_login' OR `email` = '$student_login'");
  $row = mysqli_fetch_assoc($result);
 ?>
 

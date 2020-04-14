@@ -4,17 +4,16 @@ include 'header.php';
 
 $librarian_login = $_SESSION['librarian_login'];
 
- $result = mysqli_query($con, "SELECT * FROM `librarian` WHERE `username` = '$librarian_login'");
+ $result = mysqli_query($con, "SELECT * FROM `librarian` WHERE `username` = '$librarian_login' OR `email`= '$librarian_login'");
  $row = mysqli_fetch_assoc($result);
 
  if (isset($_POST['update_profile'])) {
 
     $fname = $_POST['fname'];
-    $email = $_POST['email'];
     $mobile = $_POST['mobile'];
 
 
-    $qry = "UPDATE `librarian` SET `fname`='$fname',`email`='$email',`mobile`='$mobile' WHERE `username` = '$librarian_login'";
+    $qry = "UPDATE `librarian` SET `fname`='$fname',`mobile`='$mobile' WHERE `username` = '$librarian_login' OR `email` = '$librarian_login'";
 
     $result = mysqli_query($con,$qry);
 
@@ -71,7 +70,7 @@ $librarian_login = $_SESSION['librarian_login'];
                 $photo = end($photo);
                 $photo_name = date('Ymdhis.').$photo;
 
-               $upload = mysqli_query($con,"UPDATE `librarian` SET `image`='$photo_name' WHERE `username` = '$librarian_login'");
+               $upload = mysqli_query($con,"UPDATE `librarian` SET `image`='$photo_name' WHERE `username` = '$librarian_login' OR `email` = '$librarian_login'");
 
                if ($upload) {
 
@@ -137,7 +136,11 @@ $librarian_login = $_SESSION['librarian_login'];
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email Address</label>
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?= $row['email'] ?>">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="<?= $row['email'] ?>" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">User Name</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?= $row['username'] ?>" readonly>
                                         </div>
                                         <div class="form-group">
                                             <label for="phone">Phone No.</label>
