@@ -58,7 +58,7 @@
                               <?php  } ?>
                                         
                                     <?php }else {
-                                        echo '<h3> Books Not Found!</h3>';
+                                        echo '<h3 style="text-align: center"> Books Not Found!</h3>';
                                     } ?>
 
                         </div>

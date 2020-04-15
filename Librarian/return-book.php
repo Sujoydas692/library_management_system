@@ -36,7 +36,7 @@ include 'header.php';
                                     <tbody>
                                         <?php
 
-                                        $result = mysqli_query($con, "SELECT `issue_books`.`id`,`issue_books`.`book_id`,`issue_books`.`book_issue_date`,`student`.`fname`,`student`.`lname`,`student`.`roll`,`student`.`phone`,`books`.`book_name`,`books`.`book_image`
+                                        $result = mysqli_query($con, "SELECT `issue_books`.`id`,`issue_books`.`book_id`,`issue_books`.`book_issue_date`,`student`.`fname`,`student`.`roll`,`student`.`phone`,`books`.`book_name`,`books`.`book_image`
                                             FROM `issue_books`
                                             INNER JOIN `student` ON `student`.`id`=`issue_books`.`student_id`
                                             INNER JOIN `books` ON `books`.`id`=`issue_books`.`book_id`
@@ -44,7 +44,7 @@ include 'header.php';
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             ?>
                                             <tr>
-                                               <td><?= ucwords($row['fname'] .' '. $row['lname']) ?></td>
+                                               <td><?= ucwords($row['fname']) ?></td>
                                                <td><?= $row['roll'] ?></td>
                                                <td><?= $row['phone'] ?></td>
                                                <td><?= $row['book_name'] ?></td>

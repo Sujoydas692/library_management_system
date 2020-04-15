@@ -1,4 +1,13 @@
 <?php
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require '../assests/PHPMailer/src/Exception.php';
+require '../assests/PHPMailer/src/PHPMailer.php';
+require '../assests/PHPMailer/src/SMTP.php';
 
 include '../connection.php';
 
@@ -15,6 +24,7 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'];
     $c_password = $_POST['c_password'];
     $mobile = $_POST['mobile'];
+    $token = md5(time().$email);
 
     $image = explode('.', $_FILES['image']['name']);
     $image_ext = end($image);
@@ -69,12 +79,44 @@ if (isset($_POST['register'])) {
 
                         if ($phone_check_row == 0) {
 
-                                 $result = mysqli_query($con, "INSERT INTO `librarian`(`fname`, `email`, `username`, `password`, `mobile`, `image`) VALUES ('$fname','$email','$username','$password','$mobile','$image')");
+                                 $result = mysqli_query($con, "INSERT INTO `librarian`(`fname`, `email`, `username`, `password`, `token`, `status`, `mobile`, `image`) VALUES ('$fname','$email','$username','$password','$token','0','$mobile','$image')");
 
                                  if ($result) {
 
                                     move_uploaded_file($_FILES['image']['tmp_name'], '../images/librarian/'.$image);
-                                    $success = "Registration Successfully!";
+
+                                    $mail = new PHPMailer(true);
+
+                                        try {
+                                            //Server settings
+                                            $mail->isSMTP();                                            // Send using SMTP
+                                            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+                                            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                                            $mail->Username   = 'sujoydas692@gmail.com';                     // SMTP username
+                                            $mail->Password   = 'sujoysubir05050575';                               // SMTP password
+                                            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+                                            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+
+                                            //Recipients
+                                            $mail->setFrom('sujoydas692@gmail.com', 'Anonymous');
+                                            $mail->addAddress($email);     // Add a recipient
+                                            $mail->addReplyTo('no-reply@gmail.com', 'No reply');
+
+                                            // Content
+                                            $url = $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/verify.php?token=$token";
+                                            $mail->isHTML(true);                                  // Set email format to HTML
+                                            $mail->Subject = 'Register Your Account';
+                                            $mail->Body    = "Click on the linkn below to register your account.<br>
+                                                               <a href='$url'>Register Your Account</a>";
+                                            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                                            $mail->send();
+                                            header('location: thankyou.php');
+                                        } catch (Exception $e) {
+                                            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                                        }
+                                        exit();
+                                    //$success = "Registration Successfully!";
 
                                     
                                     //header('location: register.php');

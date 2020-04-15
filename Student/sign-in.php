@@ -52,10 +52,11 @@ if (isset($_POST['login'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>LMS</title>
-    <link rel="apple-touch-icon" sizes="120x120" href="../assests/favicon/apple-icon-120x120.png">
+    <link rel="icon" type="image/png" href="../assests/images/icon.png">
+   <!--  <link rel="apple-touch-icon" sizes="120x120" href="../assests/favicon/apple-icon-120x120.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assests/favicon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assests/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assests/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assests/favicon/favicon-16x16.png"> -->
     <!--BASIC css-->
     <!-- ========================================================= -->
     <link rel="stylesheet" href="../assests/vendor/bootstrap/css/bootstrap.css">

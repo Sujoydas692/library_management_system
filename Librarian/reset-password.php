@@ -2,7 +2,7 @@
 include '../connection.php';
 
 if (!isset($_GET['token'])) {
-    exit("Can't fing page!");
+    exit("Can't find page!");
     
 }
 
