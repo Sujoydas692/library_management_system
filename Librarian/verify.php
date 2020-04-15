@@ -16,9 +16,10 @@ if (mysqli_num_rows($qry) == 1) {
         <div class="row animated bounce ">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="panel mt-xlg">
-                    <div class="panel-content"><i class="fa fa-smile-o" style="font-size: 80px; padding-left: 400px;"></i>
+                    <div class="panel-content">
+                        <h1 class="error-number"><i class="fa fa-smile-o"></i></h1>
                         <p class="error-text">Your account has been verified.
-                            <br/>You may now login. </p>
+                            <br/>You may now <a href="sign-in.php">login.</a> </p>
                     </div>
                 </div>
             </div>
@@ -37,8 +38,10 @@ if (mysqli_num_rows($qry) == 1) {
         <div class="row animated bounce ">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="panel mt-xlg">
-                    <div class="panel-content"><i class="fa fa-frown-o" style="font-size: 80px; padding-left: 400px;"></i>
-                        <p class="error-text">This account Invalid or already verified.</p>
+                    <div class="panel-content">
+                        <h1 class="error-number">4<i class="fa fa-frown-o"></i>4</h1>
+                        <h2 class="error-name"> Sorry! The Page not found</h2>
+                        <p class="error-text">Sorry, the page you are looking for cannot be found.</p>
                     </div>
                 </div>
             </div>
@@ -49,8 +52,28 @@ if (mysqli_num_rows($qry) == 1) {
 	<?php
 	
 }
-} else {
-	die("Something went Wrong!");
+} else { ?>
+    <div class="wrap">
+    <!-- page BODY -->
+    <!-- ========================================================= -->
+    <div class="page-body">
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <div class="row animated bounce ">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="panel mt-xlg">
+                    <div class="panel-content">
+                        <h1 class="error-number">4<i class="fa fa-frown-o"></i>4</h1>
+                        <h2 class="error-name"> Sorry! The Page not found</h2>
+                        <p class="error-text">Sorry, the page you are looking for cannot be found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    </div>
+</div>
+    <?php
+	
 }
 
 

@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (isset($_SESSION['student_login'])) {
+    header('location: index.php');
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en" class="fixed accounts sign-in">
 <head>
@@ -27,9 +37,10 @@
         <div class="row animated bounce ">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="panel mt-xlg">
-                    <div class="panel-content"><i class="fa fa-envelope" style="font-size: 80px; padding-left: 400px;"></i>
-                        <p class="error-text">Thank you for registering.
-                            <br/>We have sent a verification email to the address provided. </p>
+                    <div class="panel-content">
+                        <h1 class="error-number"><i class="fa fa-envelope"></i></h1>
+                        <h2 class="error-name"> Thank you for registering</h2>
+                            <p class="error-text">We have sent a verification email to the address provided. </p>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (isset($_SESSION['librarian_login'])) {
+    header('location: index.php');
+}
+
+?>
+
 <!doctype html>
 <html lang="en" class="fixed accounts sign-in">
 <head>
@@ -27,9 +36,10 @@
         <div class="row animated bounce ">
             <div class="col-sm-8 col-sm-offset-2">
                 <div class="panel mt-xlg">
-                    <div class="panel-content"><i class="fa fa-envelope" style="font-size: 80px; padding-left: 400px;"></i>
-                        <p class="error-text">A password recovery link has been sent to your email.
-                            <br/>Please check your email and click on the link to reset your password. </p>
+                    <div class="panel-content">
+                        <h1 class="error-number"><i class="fa fa-envelope"></i></h1>
+                        <h3 class="error-name"> A password recovery link has been sent to your email</h3>
+                            <p class="error-text">Please check your email and click on the link to reset your password. </p>
                     </div>
                 </div>
             </div>

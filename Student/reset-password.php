@@ -1,16 +1,56 @@
 <?php
 include '../connection.php';
 
-if (!isset($_GET['token'])) {
-    exit("Can't find page!");
+if (!isset($_GET['token'])) { ?>
+  <div class="wrap">
+    <!-- page BODY -->
+    <!-- ========================================================= -->
+    <div class="page-body">
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <div class="row animated bounce ">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="panel mt-xlg">
+                    <div class="panel-content">
+                        <h1 class="error-number">4<i class="fa fa-frown-o"></i>4</h1>
+                        <h2 class="error-name"> Sorry! The Page not found</h2>
+                        <p class="error-text">Sorry, the page you are looking for cannot be found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    </div>
+</div>
+  <?php
+    
     
 }
 
 $token = $_GET['token'];
 
 $qry = mysqli_query($con, "SELECT `email` FROM `token` WHERE `token` = '$token'");
-if (mysqli_num_rows($qry) == 0) {
-    exit("Can't find page!");
+if (mysqli_num_rows($qry) == 0) { ?>
+  <div class="wrap">
+    <!-- page BODY -->
+    <!-- ========================================================= -->
+    <div class="page-body">
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <div class="row animated bounce ">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="panel mt-xlg">
+                    <div class="panel-content">
+                        <h1 class="error-number">4<i class="fa fa-frown-o"></i>4</h1>
+                        <h2 class="error-name"> Sorry! The Page not found</h2>
+                        <p class="error-text">Sorry, the page you are looking for cannot be found.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    </div>
+</div>
+  <?php
+    
 }
 
 $password = isset($_POST['password']) ? $_POST['password']:'';
