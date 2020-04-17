@@ -94,7 +94,7 @@ if (!isset($_SESSION['librarian_login'])) {
                     <div class="user-options dropdown-box">
                         <div class="drop-content basic">
                             <ul>
-                                <li> <a href="user-profile.php"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             </ul>
                         </div>
                     </div>
@@ -127,16 +127,16 @@ if (!isset($_SESSION['librarian_login'])) {
                             <ul class="nav nav-left-lines" id="main-nav">
                                 <!--HOME-->
                                 <li class="<?= $page == 'index.php' ? 'active-item':'' ?>"><a href="index.php"><i class="fa fa-home" aria-hidden="true"></i><span>Dashboard</span></a></li>
-                                 <li class="<?= $page == 'student.php' ? 'active-item':'' ?>"><a href="student.php"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Student</span></a></li>
+                                 <li class="<?= $page == 'student.php' ? 'active-item':'' ?>"><a href="student.php?id=<?= base64_encode($row['id']) ?>"><i class="fa fa-graduation-cap" aria-hidden="true"></i><span>Student</span></a></li>
                                  <li class="has-child-item close-item <?= $page == 'add-book.php' ? 'open-item':'' ?><?= $page == 'manage-book.php' ? 'open-item':'' ?>">
                                     <a><i class="fa fa-book" aria-hidden="true"></i><span>Books</span></a>
                                     <ul class="nav child-nav level-1">
-                                        <li class="<?= $page == 'add-book.php' ? 'active-item':'' ?>"><a href="add-book.php">Add Book</a></li>
-                                        <li class="<?= $page == 'manage-book.php' ? 'active-item':'' ?>"><a href="manage-book.php">Manage Books</a></li>
+                                        <li class="<?= $page == 'add-book.php' ? 'active-item':'' ?>"><a href="add-book.php?id=<?= base64_encode($row['id']) ?>">Add Book</a></li>
+                                        <li class="<?= $page == 'manage-book.php' ? 'active-item':'' ?>"><a href="manage-book.php?id=<?= base64_encode($row['id']) ?>">Manage Books</a></li>
                                     </ul>
                                 </li>
-                                <li class="<?= $page == 'issue-book.php' ? 'active-item':'' ?>"><a href="issue-book.php"><i class="fa fa-book" aria-hidden="true"></i><span>Issue Book</span></a></li>
-                                <li class="<?= $page == 'return-book.php' ? 'active-item':'' ?>"><a href="return-book.php"><i class="fa fa-book" aria-hidden="true"></i><span>Return Book</span></a></li>
+                                <li class="<?= $page == 'issue-book.php' ? 'active-item':'' ?>"><a href="issue-book.php?id=<?= base64_encode($row['id']) ?>"><i class="fa fa-book" aria-hidden="true"></i><span>Issue Book</span></a></li>
+                                <li class="<?= $page == 'return-book.php' ? 'active-item':'' ?>"><a href="return-book.php?id=<?= base64_encode($row['id']) ?>"><i class="fa fa-book" aria-hidden="true"></i><span>Return Book</span></a></li>
 
                             </ul>
                         </nav>

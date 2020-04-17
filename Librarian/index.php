@@ -27,7 +27,7 @@ include 'header.php';
                     <!--BOX Style 1-->
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="panel widgetbox wbox-1 bg-lighter-2 color-light">
-                            <a href="student.php">
+                            <a href="student.php?id=<?= base64_encode($row['id']) ?>">
                                 <div class="panel-content">
                                     <h1 class="title color-darker-2"> <i class="fa fa-users"></i> <?= $total_student ?> </h1>
                                     <h4 class="subtitle color-darker-1">Total Student</h4>
@@ -44,7 +44,7 @@ include 'header.php';
                     <!--BOX Style 1-->
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="panel widgetbox wbox-1 bg-lighter-2 color-light">
-                            <a href="#">
+                            <a href="javascript:avoid(0)">
                                 <div class="panel-content">
                                     <h1 class="title color-darker-2"> <i class="fa fa-users"></i> <?= $total_librarian ?> </h1>
                                     <h4 class="subtitle color-darker-1">Total Librarian</h4>
@@ -67,7 +67,7 @@ include 'header.php';
                     <!--BOX Style 1-->
                     <div class="col-sm-6 col-md-4 col-lg-3">
                         <div class="panel widgetbox wbox-1 bg-lighter-2 color-light">
-                            <a href="manage-book.php">
+                            <a href="manage-book.php?id=<?= base64_encode($row['id']) ?>">
                                 <div class="panel-content">
                                     <h1 class="title color-darker-2"> <i class="fa fa-book"></i> <?= $total_books .' ('. $qty['total'] .' - '. $a_qty['total'] .')' ?> </h1>
                                     <h4 class="subtitle color-darker-1">Total Books</h4>
