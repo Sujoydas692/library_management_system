@@ -11,7 +11,7 @@ if (isset($_SESSION['student_login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>LMS</title>
+    <title>Library Management System</title>
     <link rel="icon" type="image/png" href="../assests/images/icon.png">
     <!--BASIC css-->
     <!-- ========================================================= -->

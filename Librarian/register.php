@@ -169,7 +169,7 @@ if (isset($_POST['register'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Librarian Registration</title>
+    <title>Library Management System</title>
     <link rel="icon" type="image/png" href="../assests/images/icon.png">
     <!--BASIC css-->
     <!-- ========================================================= -->
@@ -191,7 +191,7 @@ if (isset($_POST['register'])) {
         <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
         <!--LOGO-->
         <div class="logo">
-            <h1 class="text-center">LMS</h1>
+            <h2 class="text-center">Registration</h2>
 
             <?php
               if (isset($success)) {

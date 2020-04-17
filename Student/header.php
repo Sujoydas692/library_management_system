@@ -20,7 +20,7 @@ $student_login = $_SESSION['student_login'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>LMS</title>
+    <title>Library Management System</title>
     <link rel="icon" type="image/png" href="../assests/images/icon.png">
     <!--load progress bar-->
     <script src="../assests/vendor/pace/pace.min.js"></script>
@@ -55,7 +55,7 @@ $student_login = $_SESSION['student_login'];
             <div class="leftside-header">
                 <div class="logo">
                     <a href="index.php" class="on-click">
-                        <h3>LMS</h3>
+                        <h3 style="margin-left: 10px">LMS</h3>
                     </a>
                 </div>
                 <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open" data-target="html">
@@ -82,7 +82,7 @@ $student_login = $_SESSION['student_login'];
                     <div class="user-options dropdown-box">
                         <div class="drop-content basic">
                             <ul>
-                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'name='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             </ul>
                         </div>
                     </div>

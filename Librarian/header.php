@@ -28,7 +28,7 @@ if (!isset($_SESSION['librarian_login'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>LMS</title>
+    <title>Library Management System</title>
     <link rel="icon" type="image/png" href="../assests/images/icon.png">
     <!-- <link rel="apple-touch-icon" sizes="120x120" href="../assests/favicon/apple-icon-120x120.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assests/favicon/android-icon-192x192.png">
@@ -67,7 +67,8 @@ if (!isset($_SESSION['librarian_login'])) {
             <div class="leftside-header">
                 <div class="logo">
                     <a href="index.php" class="on-click">
-                        <h3> LMS</h3>
+                        <h3 style="margin-left: 10px"> LMS</h3>
+
                     </a>
                 </div>
                 <div id="menu-toggle" class="visible-xs toggle-left-sidebar" data-toggle-class="left-sidebar-open" data-target="html">
@@ -94,7 +95,7 @@ if (!isset($_SESSION['librarian_login'])) {
                     <div class="user-options dropdown-box">
                         <div class="drop-content basic">
                             <ul>
-                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'name='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             </ul>
                         </div>
                     </div>
@@ -136,7 +137,7 @@ if (!isset($_SESSION['librarian_login'])) {
                                     </ul>
                                 </li>
                                 <li class="<?= $page == 'issue-book.php' ? 'active-item':'' ?>"><a href="issue-book.php?id=<?= base64_encode($row['id']) ?>"><i class="fa fa-book" aria-hidden="true"></i><span>Issue Book</span></a></li>
-                                <li class="<?= $page == 'return-book.php' ? 'active-item':'' ?>"><a href="return-book.php?id=<?= base64_encode($row['id']) ?>"><i class="fa fa-book" aria-hidden="true"></i><span>Return Book</span></a></li>
+                                <li class="<?= $page == 'return-book.php' ? 'active-item':'' ?>"><a href="return-book.php"><i class="fa fa-book" aria-hidden="true"></i><span>Return Book</span></a></li>
 
                             </ul>
                         </nav>

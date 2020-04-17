@@ -62,7 +62,7 @@ exit();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>LMS</title>
+    <title>Library Management System</title>
     <link rel="icon" type="image/png" href="../assests/images/icon.png">
     <!-- <link rel="apple-touch-icon" sizes="120x120" href="../assests/favicon/apple-icon-120x120.png">
     <link rel="icon" type="image/png" sizes="192x192" href="../assests/favicon/android-icon-192x192.png">
@@ -88,7 +88,7 @@ exit();
         <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
         <!--LOGO-->
         <div class="logo">
-            <h1 class="text-center">Reset Password</h1>
+            <h2 class="text-center">Reset Password</h2>
         </div>
         <div class="box">
             <!--SIGN IN FORM-->
