@@ -83,7 +83,7 @@ if (!isset($_SESSION['librarian_login'])) {
                 <div class="header-section" id="user-headerbox">
                     <div class="user-header-wrap">
                         <div class="user-photo">
-                            <img alt="profile photo" src="../images/librarian/<?= $row['image'] ?>" />
+                            <img alt="profile photo" src="../images/librarian/<?= empty($row['image']) ? "logo.png" : $row['image'] ?>" style="border-radius: 50%; width: 100%; height: 30px; background-size: cover;" />
                         </div>
                         <div class="user-info">
                             <span class="user-name"><?= ucwords($row['fname']) ?></span>
@@ -95,7 +95,7 @@ if (!isset($_SESSION['librarian_login'])) {
                     <div class="user-options dropdown-box">
                         <div class="drop-content basic">
                             <ul>
-                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'name='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']) ?>&username=<?= ucwords($row['username']) ?>&name=<?= ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             </ul>
                         </div>
                     </div>

@@ -107,7 +107,7 @@ $librarian_login = $_SESSION['librarian_login'];
                 <div class="header-section" id="user-headerbox">
                     <div class="user-header-wrap">
                         <div class="user-photo">
-                            <img alt="profile photo" src="../images/librarian/<?= $row['image'] ?>" />
+                            <img alt="profile photo" src="../images/librarian/<?= empty($row['image']) ? "logo.png" : $row['image'] ?>" style="border-radius: 50%; width: 100%; height: 30px; background-size: cover;" />
                         </div>
                         <div class="user-info">
                             <span class="user-name"><?= ucwords($row['fname']) ?></span>
@@ -119,7 +119,7 @@ $librarian_login = $_SESSION['librarian_login'];
                     <div class="user-options dropdown-box">
                         <div class="drop-content basic">
                             <ul>
-                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']).'='.ucwords($row['username']).'name='.ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+                                <li> <a href="user-profile.php?id=<?= base64_encode($row['id']) ?>&username=<?= ucwords($row['username']) ?>&name=<?= ucwords($row['fname']) ?>"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
                             </ul>
                         </div>
                     </div>
@@ -188,7 +188,9 @@ $librarian_login = $_SESSION['librarian_login'];
                     <!--PROFILE-->
                     <div>
                         <div class="profile-photo">
-                            <img alt="User photo" src="../images/librarian/<?= $row['image'] ?>" onclick="triggerClick()" id="profiledisplay" style="cursor: pointer;" >
+                                <img alt="User photo" src="../images/librarian/<?= empty($row['image']) ? "logo.png" : $row['image'] ?>" title="Change Profile Photo" onclick="triggerClick()" id="profiledisplay" style="cursor: pointer; border-radius: 50%; width: 100%; height: 140px; background-size: cover;">
+                               
+                            
                         </div>
                         <div class="user-header-info">
                             <h2 class="user-name"><?= ucwords($row['fname']) ?></h2>
@@ -204,7 +206,9 @@ $librarian_login = $_SESSION['librarian_login'];
                 $photo = end($photo);
                 $photo_name = date('Ymdhis.').$photo;
 
-               $upload = mysqli_query($con,"UPDATE `librarian` SET `image`='$photo_name' WHERE `username` = '$librarian_login' OR `email` = '$librarian_login'");
+                $sql = "UPDATE `librarian` SET `image`='$photo_name' WHERE `username` = '$librarian_login' OR `email` = '$librarian_login'";
+
+               $upload = mysqli_query($con,$sql);
 
                if ($upload) {
 
@@ -228,7 +232,7 @@ $librarian_login = $_SESSION['librarian_login'];
 
             <form action="" enctype="multipart/form-data" method="POST">
                 <br><input type="file" name="image" onchange="displayImage(this)" required="" id="image" style="display: none;">
-                <input type="submit" name="update" value="Update" required="" class="btn btn-primary btn-sm">
+                <input type="submit" name="update" value="Update" required="" class="btn btn-primary btn-sm" style="margin-left: 35px;" >
             </form>
             
         </div>

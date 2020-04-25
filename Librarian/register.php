@@ -26,10 +26,10 @@ if (isset($_POST['register'])) {
     $mobile = $_POST['mobile'];
     $token = md5(time().$email);
 
-    $image = explode('.', $_FILES['image']['name']);
-    $image_ext = end($image);
+    // $image = explode('.', $_FILES['image']['name']);
+    // $image_ext = end($image);
 
-    $image = date('Ymdhis.').$image_ext;
+    // $image = date('Ymdhis.').$image_ext;
 
      $input_error = array();
      if (empty($fname)) {
@@ -79,11 +79,11 @@ if (isset($_POST['register'])) {
 
                         if ($phone_check_row == 0) {
 
-                                 $result = mysqli_query($con, "INSERT INTO `librarian`(`fname`, `email`, `username`, `password`, `token`, `status`, `mobile`, `image`) VALUES ('$fname','$email','$username','$password','$token','0','$mobile','$image')");
+                                 $result = mysqli_query($con, "INSERT INTO `librarian`(`fname`, `email`, `username`, `password`, `token`, `status`, `mobile`) VALUES ('$fname','$email','$username','$password','$token','0','$mobile')");
 
                                  if ($result) {
 
-                                    move_uploaded_file($_FILES['image']['tmp_name'], '../images/librarian/'.$image);
+                                    // move_uploaded_file($_FILES['image']['tmp_name'], '../images/librarian/'.$image);
 
                                     $mail = new PHPMailer(true);
 
@@ -366,11 +366,11 @@ if (isset($_POST['register'])) {
                             } ?>
 
                         </div>
-                        <div class="form-group mt-md">
+                        <!-- <div class="form-group mt-md">
                              <div class="col-sm-6 offset-3">
                                <input id="image" type="file" name="image" required="">
                              </div><br>
-                         </div>
+                         </div> -->
                         <div class="form-group">
                                 <input class="btn btn-primary btn-block" type="submit" name="register" value="Sign Up">
                             

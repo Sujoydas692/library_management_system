@@ -27,10 +27,10 @@ if (isset($_POST['register'])) {
     $phone = $_POST['phone'];
     $token = md5(time().$email);
 
-    $image = explode('.', $_FILES['image']['name']);
-    $image_ext = end($image);
+    // $image = explode('.', $_FILES['image']['name']);
+    // $image_ext = end($image);
 
-    $image = date('Ymdhis.').$image_ext;
+    // $image = date('Ymdhis.').$image_ext;
 
      $input_error = array();
      if (empty($fname)) {
@@ -89,11 +89,11 @@ if (isset($_POST['register'])) {
                         if ($phone_check_row == 0) {
                              $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-                                 $result = mysqli_query($con, "INSERT INTO `student`(`fname`, `roll`, `email`, `username`, `password`,`token`,`status`,`phone`,`image`) VALUES ('$fname','$roll','$email','$username','$password_hash','$token','0','$phone','$image')");
+                                 $result = mysqli_query($con, "INSERT INTO `student`(`fname`, `roll`, `email`, `username`, `password`,`token`,`status`,`phone`) VALUES ('$fname','$roll','$email','$username','$password_hash','$token','0','$phone')");
 
                                  if ($result) {
 
-                                    move_uploaded_file($_FILES['image']['tmp_name'], '../images/student/'.$image);
+                                    // move_uploaded_file($_FILES['image']['tmp_name'], '../images/student/'.$image);
                                     
                                     $mail = new PHPMailer(true);
 
@@ -404,11 +404,11 @@ if (isset($_POST['register'])) {
                             } ?>
 
                         </div>
-                        <div class="form-group mt-md">
+                        <!-- <div class="form-group mt-md">
                              <div class="col-sm-6 offset-3">
                                <input id="image" type="file" name="image" required="">
                              </div><br>
-                         </div>
+                         </div> -->
                         <div class="form-group">
                                 <input class="btn btn-primary btn-block" type="submit" name="register" value="Sign Up">
                             
