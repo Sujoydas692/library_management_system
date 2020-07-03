@@ -132,12 +132,15 @@
 
                                     $result = mysqli_query($con,"SELECT * FROM `books`");
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
-                                      
+
                                   <div class="col-sm-3 col-md-2">
                                     <a href="javascript:avoid(0)" data-toggle="modal" data-target="#book-<?= $row['id'] ?>"><img src="../images/books/<?= $row['book_image'] ?>" width='100'></a>
                                     <p><?= $row['book_name'] ?></p>
                                     <span><b>Aailable: <?= $row['available_qty'] ?></b></span>
                                   </div>
+                                        
+                                      
+                                  
                               <?php  } ?>
                         </div>
                             </div>

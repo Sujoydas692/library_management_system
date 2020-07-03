@@ -175,7 +175,7 @@ $student_login = $_SESSION['student_login'];
                     <!--PROFILE-->
                     <div>
                         <div class="profile-photo">
-                            <img alt="User photo" src="../images/student/<?= empty($row['image']) ? "logo.png" : $row['image'] ?>" title="Change Profile Photo" onclick="triggerClick()" id="profiledisplay" style="cursor: pointer; border-radius: 50%; width: 100%; height: 140px; background-size: cover;">
+                            <i class="fa fa-camera" aria-hidden="true" onclick="triggerClick()" title="Change Profile Photo" style="position: absolute; left: 110px; top: 104px; font-size: 30px; background: #fff; color: #189279; padding: 6px; border-radius: 11px; cursor: pointer;"></i><img alt="User photo" src="../images/student/<?= empty($row['image']) ? "logo.png" : $row['image'] ?>" title="Change Profile Photo" onclick="triggerClick()" id="profiledisplay" style="cursor: pointer; border-radius: 50%; width: 100%; height: 140px; background-size: cover;">
                         </div>
                         <div class="user-header-info">
                             <h2 class="user-name"><?= ucwords($row['fname']) ?></h2>
